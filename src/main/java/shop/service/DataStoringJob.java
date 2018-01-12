@@ -20,19 +20,15 @@ public class DataStoringJob {
         };
         ObjectWriter writer = mapper.writerFor(types);
 
-        List<Animal> animals = null;
-        String jsonInString = null;
         try {
-            animals = storage.getAnimals();
-            jsonInString = writer.writeValueAsString(animals);
+            List<Animal> animals = storage.getAnimals();
+            String jsonInString = writer.writeValueAsString(animals);
             FileWriter fileWriter = new FileWriter("file.json", false);
             fileWriter.write(jsonInString);
             fileWriter.flush();
             fileWriter.close();
         } catch (IOException e) {
             e.printStackTrace();
-            System.out.println(animals.toString());
-            System.out.println(jsonInString);
         }
 
     }
@@ -60,15 +56,4 @@ public class DataStoringJob {
             }
         }
     }
-
-    /*public void run() {
-        while(true) {
-            try {
-                Thread.sleep(10000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            saveAnimals();
-        }
-    }*/
 }
